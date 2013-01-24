@@ -8,8 +8,7 @@
     "a-x/ax.widget": "*",
     "a-x/ax.loader": "*",
     "a-x/ax.servicerpc": "*",
-    "a-x/bootstrap": "*",
-    "component/piecon": "*"
+    "a-x/bootstrap": "*"
   },
   "development": {},
   "license": "Ax"
