@@ -10,7 +10,7 @@
     "a-x/ax.servicerpc": "*",
     "a-x/bootstrap": "*",
     "component/piecon": "*"
-  }
+  },
   "development": {},
   "license": "Ax"
 }
