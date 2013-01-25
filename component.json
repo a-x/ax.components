@@ -1,7 +1,7 @@
 {
-  "name": "ax",
-  "repo": "a-x/ax",
-  "description": "Ax lib",
+  "name": "ax.components",
+  "repo": "a-x/ax.components",
+  "description": "Ax components",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {

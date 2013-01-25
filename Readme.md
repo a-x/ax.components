@@ -1,11 +1,11 @@
 
 # ax
 
-  Ax lib
+  Ax components
 
 ## Installation
 
-    $ component install a-x/ax
+    $ component install a-x/ax.components
 
 ## API
 
