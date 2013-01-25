@@ -10,6 +10,10 @@
     "a-x/ax.servicerpc": "*",
     "a-x/bootstrap": "*"
   },
+  "main": "ax.js",
+  "scripts": [
+    "ax.js"
+  ],
   "development": {},
   "license": "Ax"
 }
