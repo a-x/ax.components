@@ -5,14 +5,16 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "a-x/ax.widget": "*",
-    "a-x/ax.loader": "*",
-    "a-x/ax.servicerpc": "*",
-    "a-x/bootstrap": "*"
+    "a-x/jquery": "*",
+    "a-x/sockjs": "*"
   },
   "main": "ax.js",
   "scripts": [
-    "ax.js"
+    "ax.js",
+    "loader.js",
+    "util.js",
+    "servicerpc.js",
+    "widget.js"
   ],
   "development": {},
   "license": "Ax"
