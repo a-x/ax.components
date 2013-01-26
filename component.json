@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "a-x/jquery": "*",
+    "a-x/underscore": "*",
     "a-x/sockjs": "*"
   },
   "main": "ax.js",
