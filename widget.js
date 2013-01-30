@@ -6,7 +6,7 @@ var $ = jQuery,
 	util = require("./util");
 
 // Called on function.extend
-exports.Widget = util.extender({
+var Widget = module.exports = util.extender({
     // TODO: Widget.data function with redraw when data changed
     // TODO: Proxy all function
     // $(initElement)

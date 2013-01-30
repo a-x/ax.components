@@ -4,7 +4,7 @@ require("jQuery");
 require("_");
 
 var $ = jQuery",
-    Widget = require("ax/widget").Widget;
+    Widget = require("./widget").Widget;
 
 _.templateSettings = $.extend({}, _.templateSettings, {
     //        interpolatec: /\{\{=(.+?)\}\}/g,
@@ -12,8 +12,8 @@ _.templateSettings = $.extend({}, _.templateSettings, {
     //        escape      : /\{\{-(.+?)\}\}/g,
     variable: 'data'
 });
-exports._Widget = Widget.extend({
-    template: "Template",
+var Widget = module.exports= Widget.extend({
+    template: "Template{{ <%a%> }}",
     render: function() {
         this.html(this.templ(this.data()));
     },
