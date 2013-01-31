@@ -15,7 +15,7 @@
     "loader.js",
     "util.js",
     "servicerpc.js",
-    "dom",
+    "dom.js",
     "widget-template",
     "widget.js"
   ],
