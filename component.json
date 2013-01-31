@@ -16,7 +16,7 @@
     "util.js",
     "servicerpc.js",
     "dom.js",
-    "widget-template",
+    "widget-template.js",
     "widget.js"
   ],
   "development": {},
