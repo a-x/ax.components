@@ -3,7 +3,7 @@
 require("jQuery");
 require("_");
 
-var $ = jQuery",
+var $ = jQuery,
     Widget = require("./widget").Widget;
 
 _.templateSettings = $.extend({}, _.templateSettings, {

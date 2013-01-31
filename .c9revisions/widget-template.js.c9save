@@ -9,3 +9,4 @@
 {"ts":1359567797132,"patch":[[{"diffs":[[0,"ate{{ <%"],[1,"%"],[0," }}\",\n  "]],"start1":383,"start2":383,"length1":16,"length2":17}]],"length":615,"saved":false}
 {"ts":1359567798347,"patch":[[{"diffs":[[0,"te{{ <%%"],[1,">"],[0," }}\",\n  "]],"start1":384,"start2":384,"length1":16,"length2":17}]],"length":616,"saved":false}
 {"ts":1359567801494,"patch":[[{"diffs":[[0,"ate{{ <%"],[1,"a"],[0,"%> }}\",\n"]],"start1":383,"start2":383,"length1":16,"length2":17}]],"length":617,"saved":false}
+{"contributors":[],"silentsave":true,"ts":1359645884523,"patch":[[{"diffs":[[0,"= jQuery"],[-1,"\""],[0,",\n    Wi"]],"start1":55,"start2":55,"length1":17,"length2":16},{"diffs":[[0,"});\n"],[-1,"exports._Widget "],[1,"var Widget = module.exports"],[0,"= Wi"]],"start1":324,"start2":324,"length1":24,"length2":35}]],"length":627,"saved":false}
