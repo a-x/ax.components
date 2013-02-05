@@ -1,10 +1,10 @@
 "use strict";
 
-require("jQuery");
-require("_");
+require("jquery");
 
 var $ = jQuery,
-    Widget = require("./widget").Widget;
+    _ = require("underscore"),
+    Widget = require("./widget");
 
 _.templateSettings = $.extend({}, _.templateSettings, {
     //        interpolatec: /\{\{=(.+?)\}\}/g,
