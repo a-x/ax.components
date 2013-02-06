@@ -90,9 +90,9 @@ var Widget = module.exports = util.extender({
     widget.data(data);
 
     // Some extra init
-    widget.applyNamesById();
-    // FIXME: widget.applyProxy();
-    widget.applyEvents();
+    Widget.applyNamesById && widget.applyNamesById();
+    Widget.applyProxy && widget.applyProxy();
+    Widget.applyEvents && widget.applyEvents();
     widget.on("dataChanged", widget.proxy(widget.dataChanged))
     widget.on("data", widget.proxy(widget.render));
     
@@ -132,3 +132,6 @@ $.fn.widget = function(func, data) {
     return $this.data("widget") || func && (func || Widget)(data || {}, $this);
 };
 
+Widget.applyNamesById = true;
+Widget.applyEvents = true;
+Widget.applyProxy = false;
