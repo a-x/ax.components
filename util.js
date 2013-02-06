@@ -3,15 +3,11 @@
 var util = module.exports = {};
 
 util.extend = function(destination, source) {
-    var i = arguments.length,
-        source;
-    while ( --i ) {
-        source = arguments[i];
-        for (var property in source) {
-            destination[property] = source[property];
-        }
-    }
-    return destination;
+    for(var i=1; i<arguments.length; i++)
+        for(var key in arguments[i])
+            if(arguments[i].hasOwnProperty(key))
+                arguments[0][key] = arguments[i][key];
+    return arguments[0];
 }
 
 util.clone = function(object) {
@@ -52,7 +48,7 @@ util.extender = function(proto, func) {
 //                    arguments[6], arguments[7], arguments[8]);
 //                }
 
-            var self = (this instanceof child) ? this : $.extend({}, child.prototype);
+            var self = (this instanceof child) ? this : util.extend({}, child.prototype);
             return func ? func.apply(self, arguments) || self : self;
         };
         // TODO: extend without $
