@@ -169,7 +169,7 @@
     }
 
     // Service
-    var Service = module.Service = function(url, args) {
+    var Service = function(url, args) {
         this._args = args || {};
         this._url = url || '';
         this._methods = {};
@@ -255,5 +255,10 @@
         return this._methods[name];
     }
     
-})( typeof(module) !== 'undefined' && module.exports ? module : this, jQuery );
+    if (module.exports)
+        module.exports = Service;
+    else
+        module.Service = Service;
+
+})( (typeof(module) !== 'undefined' && module.exports) ? module : this, jQuery );
 /**   MODULE  **/
