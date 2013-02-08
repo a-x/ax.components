@@ -6,15 +6,13 @@
   "keywords": [],
   "dependencies": {
     "a-x/jquery": "*",
-    "a-x/underscore": "*",
-    "a-x/sockjs": "*"
+    "a-x/underscore": "*"
   },
   "main": "ax.js",
   "scripts": [
     "ax.js",
     "loader.js",
     "util.js",
-    "servicerpc.js",
     "dom.js",
     "widget-template.js",
     "widget.js"
