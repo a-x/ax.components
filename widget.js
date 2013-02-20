@@ -82,14 +82,14 @@ var Widget = module.exports = util.extender({
     ctor.prototype = el;
     var widget = new ctor();
 
-    el.data("widget", widget);
-    $.extend(widget, this);
-
     // extend data 
-    data = $.extend({}, this.defaults, data || {});
+    data = util.extend({}, widget.data(), this.defaults, data || {});
+    data.widget = widget;
     widget.data(data);
 
-    // Some extra init
+    util.extend(widget, this);
+
+// Some extra init
     Widget.applyNamesById && widget.applyNamesById();
     Widget.applyProxy && widget.applyProxy();
     Widget.applyEvents && widget.applyEvents();
