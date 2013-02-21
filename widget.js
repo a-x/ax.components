@@ -3,7 +3,8 @@
 require("jquery");
 
 var $ = jQuery,
-	util = require("./util");
+	util = require("./util"),
+    widgetKey = "__widget";
 
 // Called on function.extend
 var Widget = module.exports = util.extender({
@@ -83,8 +84,8 @@ var Widget = module.exports = util.extender({
     var widget = new ctor();
 
     // extend data 
-    data = util.extend({}, widget.data(), this.defaults, data || {});
-    data.widget = widget;
+    data = util.extend({}, this.defaults, widget.data(), data || {});
+    data[widgetKey] = widget;
     widget.data(data);
 
     util.extend(widget, this);
@@ -122,14 +123,14 @@ $.fn.data = (function() {
 // apply element with id to this.id
 $.fn.widgets = function(func, data) {
     return this.map(function(index, element) {
-        return $.data(element, "widget") || func(data || {}, element);
+        return $.data(element, widgetKey) || func(data || {}, element);
     });
 };
 //----------------------------------------------------------------
 // apply element with id to this.id
 $.fn.widget = function(func, data) {
     var $this = $(this);
-    return $this.data("widget") || func && (func || Widget)(data || {}, $this);
+    return $this.data(widgetKey) || func && (func || Widget)(data || {}, $this);
 };
 
 Widget.applyNamesById = true;
