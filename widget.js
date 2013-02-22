@@ -116,6 +116,8 @@ $.fn.data = (function() {
             typeof(key) === "string" ? data[key] = value : data = key;
             this.triggerHandler("dataChanged", data);
         }
+        // remove private data
+        !arguments.length && delete(res[widgetKey]);
         return res;
     };
 })();
