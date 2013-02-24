@@ -25,7 +25,7 @@ var Widget = module.exports = util.extender({
         return this;
     }
     // TODO: var listregexp = listregexp || [];
-    , dataChanged: function(e, data) {
+    , _dataChanged: function(e, data) {
         //console.log("dataChanged", data, this);
         for (var key in data) {
             data.hasOwnProperty(key) && this.triggerHandler("data:" + key, [data[key]]); //FIXME:  this.data(key)
@@ -41,16 +41,18 @@ var Widget = module.exports = util.extender({
         return $.proxy(func, this);
     }
     // apply element with id to this.id
-    , applyNamesById: function() {
-        var self = this;
+    , _applyNamesById: function() {
+        var self = this,
+            $el, id, name;
         this.find('[id]').each(function(idx, element) {
-            var $el = $(element);
-            var id = $el.attr("id");
-            self[id] = self[id] || $el;
+            $el = $(element);
+            id = $el.attr("id");
+            name = '$'+id;
+            self[name] = self[name] || $el;
         })
     }
     // proxy to this all own functions
-    , applyProxy: function() {
+    , _applyProxy: function() {
         for (var key in this) {
             var func = this[key];
             // proxy only own functions
@@ -61,7 +63,7 @@ var Widget = module.exports = util.extender({
         }
     }
     // process events map
-    , applyEvents: function() {
+    , _applyEvents: function() {
         var events = this.events || {};
         for (var key in events) {
             if (!events.hasOwnProperty(key))
@@ -91,10 +93,10 @@ var Widget = module.exports = util.extender({
     util.extend(widget, this);
 
 // Some extra init
-    Widget.applyNamesById && widget.applyNamesById();
-    Widget.applyProxy && widget.applyProxy();
-    Widget.applyEvents && widget.applyEvents();
-    widget.on("dataChanged", widget.proxy(widget.dataChanged))
+    Widget.applyNamesById && widget._applyNamesById();
+    Widget.applyProxy && widget._applyProxy();
+    Widget.applyEvents && widget._applyEvents();
+    widget.on("dataChanged", widget.proxy(widget._dataChanged))
     widget.on("data", widget.proxy(widget.render));
     
     widget.initialize();
