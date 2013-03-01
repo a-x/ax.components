@@ -31,7 +31,6 @@ var Widget = module.exports = util.extender({
             data.hasOwnProperty(key) && this.triggerHandler("data:" + key, [data[key]]); //FIXME:  this.data(key)
         }
         this.triggerHandler("data", [data]);
-        //TODO: (_render === false) flag
         
         return false;
     }
@@ -97,7 +96,7 @@ var Widget = module.exports = util.extender({
     Widget.applyProxy && widget._applyProxy();
     Widget.applyEvents && widget._applyEvents();
     widget.on("dataChanged", widget.proxy(widget._dataChanged))
-    widget.on("data", widget.proxy(widget.render));
+    widget.on("data", widget.proxy(widget.ondata || widget.render));
     
     widget.initialize();
     
