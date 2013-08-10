@@ -196,14 +196,14 @@ Item.prototype = {
                     
                     that._gets = 0;
                     
-                    that._gets && that._gets.push({
-                        sender: that,
-                        key: key
-                    });
+                    // that._gets && that._gets.push({
+                    //     sender: that,
+                    //     key: key
+                    // });
 
                     if (oldValue !== newValue) {
                         that._obj[key] = newValue;
-                        that._changedSignals[key](newValue);
+                        that._changedSignals[key](newValue, oldValue);
                         // var slot = that[key + "Changed"];
                         // if (typeof(slot) === "function") {
                         //     console.log(key + "Changed", that._obj[key], newValue);
@@ -298,14 +298,17 @@ Item.prototype = {
         zzChanged: function() {
             console.log("zzChanged", this.zz);
         },
+        width: function() {
+            console.log("width", this.width);
+        },
         signal: Signal(),
         "anchors.left": -50
     };
     var d0 = +new Date
     var item = Item(obj);
-    item.x++;
+    // item.x++;
     
-    item.x = 100;
+    // item.x = 100;
     console.log("z=", item.z, item.zz, (+new Date) - d0);
 }()
 
