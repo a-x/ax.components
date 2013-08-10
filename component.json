@@ -14,7 +14,7 @@
     "loader.js",
     "util.js",
     "dom.js",
-    "Iten.js",
+    "Item.js",
     "widget-template.js",
     "widget.js"
   ],
