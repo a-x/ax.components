@@ -152,7 +152,12 @@ function data(obj, keyOrValue, value) {
 Item.extend = function (data) {
     var parent = this;
     var constructor = function (obj) {
-        return parent.call(this, obj);
+        if (this instanceof constructor) {
+            return parent.call(this, obj);
+        }
+        else {
+            return new constructor(obj);
+        }
     }
     constructor.extend = parent.extend;
     constructor.prototype = new parent(data); // this.as constuctor
@@ -203,7 +208,12 @@ Item.prototype = {
                 return newValue;
             },
             set: function(newValue) {
-                console.log("ignore function set", key);
+                console.log("! set function value ", key, newValue);
+                var oldValue = that._values[key];
+                that._values[key] = newValue;
+                console.log("function set value", key, newValue);
+                if (oldValue !== newValue)
+                    that[key + "Changed"](newValue, oldValue);
                 // this.processValue(key, value);
             },
             enumerable: true,
@@ -274,8 +284,8 @@ Item.prototype = {
             // process key+"Change" signal
             var slot = obj[key + "Changed"],
                 value = obj[key];
-            //aplly parent value
-            if (this[key]) {
+            //FIXME: aplly parent value
+            if (typeof(this[key]) !== "undefined") {
                 this[key] = value;
                 continue;
             }
@@ -313,34 +323,6 @@ Item.prototype = {
             console.log("yChanged" ,this.x, this.y);
         }
     }
-    // {
-    //     x: 1,
-    //     xChanged: function() {
-    //         console.log("xChanged", this.x, this.y);
-    //     },
-    //     y: function() {
-    //         var y = this.x * 2
-    //         return y;
-    //     },
-    //     z: function() {
-    //         var z = this.y * 2
-    //         console.log("z =", z)
-    //         return z;
-    //     },
-    //     zz: function() {
-    //         var z = this.z - 1
-    //         return z;
-    //     },
-    //     zzChanged: function() {
-    //         console.log("zzChanged", this.zz);
-    //     },
-    //     width: function() {
-    //         console.log("width");
-    //         return Math.random(10);
-    //     },
-    //     signal: Signal(),
-    //     "anchors.left": -50
-    // };
     var d0 = +new Date
     var Obj = Item.extend(obj);
     var item = new Obj(obj);
@@ -363,11 +345,14 @@ Item.prototype = {
         z: 0,
         sum: function() {return this.x+this.y+this.z;}
     })
-    var point = new Point3D({xx: 100})
+    var point = new Point3D({
+        x: 100,
+        p1 : Point3D(),
+        p2 : Point3D({x:300}),
+        })
     point.x++
     // point.y++
-    console.log("point:", point.x, point.y, point.z, point.sum);
-    console.log(JSON.stringify(point, 0, 2));
+    console.log("point:", point.x, point.y, point.z, point.sum, point.p2.x);
 }()
 
 
