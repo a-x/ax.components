@@ -149,7 +149,16 @@ function data(obj, keyOrValue, value) {
         // set,
     }
 }
-
+Item.extend = function (data) {
+    var parent = this;
+    var constructor = function (obj) {
+        return parent.call(this, obj);
+    }
+    constructor.extend = parent.extend;
+    constructor.prototype = new parent(data); // this.as constuctor
+    constructor.prototype.constructor = constructor;
+    return constructor;
+};
 Item.prototype = {
     processFunction: function(key, value) {
         console.log("key function", key);
@@ -262,11 +271,17 @@ Item.prototype = {
         for (var i=0, l=keysValues.length; i<l; ++i) {
             key = keysValues[i];
 
-            this[key + "Changed"] = Signal();
-
             // process key+"Change" signal
             var slot = obj[key + "Changed"],
                 value = obj[key];
+            //aplly parent value
+            if (this[key]) {
+                this[key] = value;
+                continue;
+            }
+            
+            this[key + "Changed"] = Signal();
+
             if (typeof(slot) === "function") {
                 this[key + "Changed"].connect(this, slot);
             }
@@ -278,9 +293,10 @@ Item.prototype = {
             }
         }
         //init values;
-        for (key in keysValues) {
+        for (var i=0, l=keysValues.length; i<l; ++i) {
             // need Init value ?
-           // this[key];
+            // key = keysValues[i];
+            // this[key+"Changed"](this[key])
         }
     }
 }
@@ -326,14 +342,32 @@ Item.prototype = {
     //     "anchors.left": -50
     // };
     var d0 = +new Date
-    var item = Item(obj);
+    var Obj = Item.extend(obj);
+    var item = new Obj(obj);
     console.log("y=", item.y, (+new Date) - d0);
     item.x++;
     item.x+=10;
+    item.x = 5
 
     // item.x = 100;
     console.log("y=", item.y, item.zz, (+new Date) - d0, item.width, item.width);
+    item.y + item.y
     //////////////////
+    console.log("---------------------------------------");
+    var Point = Item.extend({
+        x:0,
+        xChanged : function() {this.y = this.x+20},
+        y:0
+    })
+    var Point3D = Point.extend({
+        z: 0,
+        sum: function() {return this.x+this.y+this.z;}
+    })
+    var point = new Point3D({xx: 100})
+    point.x++
+    // point.y++
+    console.log("point:", point.x, point.y, point.z, point.sum);
+    console.log(JSON.stringify(point, 0, 2));
 }()
 
 
