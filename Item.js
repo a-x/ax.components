@@ -132,6 +132,7 @@ util.extend = function(destination, source) {
     return arguments[0];
 };
 
+var gets = [];
 function Item(obj) {
     if (this instanceof Item) {
         this.processObj(obj);
@@ -164,6 +165,7 @@ Item.extend = function (data) {
     constructor.prototype.constructor = constructor;
     return constructor;
 };
+
 Item.prototype = {
     processFunction: function(key, value) {
         console.log("key function", key);
@@ -179,24 +181,24 @@ Item.prototype = {
             get: function() {
                 var oldValue = that._values[key];
 
-                that._gets = [];
+                gets = [];
 
                 console.log("get func", key, oldValue);
                 var newValue = that._slots[key].call(that);
                 console.log("get func", key, oldValue, newValue);
                 //TODO: clear old connects;
-                for (var i = that._gets.length - 1; i >= 0; --i) {
-                    var sender = that._gets[i].sender,
-                        property = that._gets[i].key;
+                for (var i = gets.length - 1; i >= 0; --i) {
+                    var sender = gets[i].sender,
+                        property = gets[i].key;
                     if (sender !== that || property !== key) 
                         sender[property + "Changed"].connect(that, recalc)
-                    console.log("  gets", that._gets[i].key);
+                    console.log("  gets", gets[i].key);
 
                 }
 
-                that._gets = 0;
+                gets = null;
 
-                that._gets && that._gets.push({
+                gets && gets.push({
                     sender: that,
                     key: key
                 });
@@ -232,7 +234,7 @@ Item.prototype = {
         Object.defineProperty(that, key, {
             get: function() {
                 console.log("get", key, that._values[key]);
-                that._gets && that._gets.push({
+                gets && gets.push({
                     sender: that,
                     key: key
                 });
