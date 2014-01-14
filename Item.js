@@ -358,6 +358,17 @@ Item.prototype = {
 }()
 
 
+var Func = function (args) {
+    Func.prototype.call(this, {});
+    console.log("F"+JSON.stringify(this, 0,2));
+}
+Func.prototype = function() {
+    this.$ = 22;
+    console.log(JSON.stringify(this, 0,2));
+}
+
+new Func({})
+this.call(0)
 // model [] interface
 // data.name = "ax"
 // data.onChanged(key, value)
