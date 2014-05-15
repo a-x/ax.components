@@ -368,7 +368,7 @@ Func.prototype = function() {
 }
 
 new Func({})
-this.call(0)
+//this.call(0)
 // model [] interface
 // data.name = "ax"
 // data.onChanged(key, value)

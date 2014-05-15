@@ -2,6 +2,10 @@
 
 require("jquery");
 
+var Creator = function (proto) {
+    var ctor = function (obj) {
+    }
+}
 var $ = jQuery,
 	util = require("./util"),
     widgetKey = "__widget";
